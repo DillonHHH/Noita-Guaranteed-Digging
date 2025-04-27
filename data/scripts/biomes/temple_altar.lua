@@ -168,8 +168,8 @@ function spawn_all_shopitems(x, y)
 	end
 
 	local first_temple = math.ceil(y / 512) == 3
-	local extra_items = { "BLACK_HOLE", "LUMINOUS_DRILL", "BLACK_HOLE", "LUMINOUS_DRILL" }
-	local prices = { 300, 300, 300, 250 }
+	local extra_items = { "BLACK_HOLE", "LUMINOUS_DRILL" }
+	local prices = { 300, 300 }
 
 
 	-- extra_items and prices MUST have the same length
@@ -183,7 +183,7 @@ function spawn_all_shopitems(x, y)
 	SetRandomSeed(x, y)
 	local count
 	if first_temple then
-		count = tonumber(GlobalsGetValue("TEMPLE_SHOP_ITEM_COUNT", "5")) + (math.ceil(#extra_items / 2) + 1)
+		count = tonumber(GlobalsGetValue("TEMPLE_SHOP_ITEM_COUNT", "5")) + math.ceil(#extra_items / 2)
 	else
 		count = tonumber(GlobalsGetValue("TEMPLE_SHOP_ITEM_COUNT", "5"))
 	end
@@ -192,7 +192,7 @@ function spawn_all_shopitems(x, y)
 	local sale_item_i = Random(1, count)
 	local extra_items_index
 	if first_temple then
-		extra_items_index = count - (#extra_items - 1)
+		extra_items_index = count - (math.ceil(#extra_items / 2))
 	else
 		extra_items_index = count
 	end
